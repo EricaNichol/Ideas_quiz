@@ -1,0 +1,50 @@
+<div class="container">
+  <article>
+  <h2><%= @idea.title %></h2>
+      <p><%= @idea.body %></p>
+  <p><b>Created On:</b> <%= @idea.created_at %> <b>By: </b> <%= @idea.user_name %> 
+  </p>
+
+ <div class="container button-group">
+  <%= link_to "Back", ideas_path, class:"btn btn-primary btn-xs"%>
+  <%= link_to "Edit", edit_idea_path, class: "btn btn-warning btn-xs"%>
+  <%= link_to "Delete", idea_path(@idea), class: "btn btn-danger btn-xs", method: :delete, data: {confirm: "Are you sure?"}%>
+  </div>
+
+  <div class="container right">
+    <% if user_signed_in? %>
+      <% if current_user.liked_idea?(@idea) %>
+      <%= link_to "Un-Like", idea_like_path(@idea, @idea.like_for(current_user)), class: "btn btn-primary btn-xs", method: :delete, title: "Un-Like" %>
+      <% elsif %>
+      <%= link_to "Like", idea_likes_path(@idea), class: "btn btn-danger btn-xs", method: :post%>
+      <% end %>
+      <% end %>
+      <%= @idea.likes.count %>
+  </div>
+
+  </article>
+</div>
+
+<div class="container comments">
+   <h5>Add New Comments</h5>
+    <%= form_for [@idea, @comment] do |f| %>
+   <div class="form-group">
+     <%= f.text_area :body, class: "form-control"%>
+   </div>
+   <div class="form-group">
+     <%= f.submit class:"btn btn-primary btn-xs"  %>
+     <% end %>
+   </div>
+ </div>
+
+ <div class="container comments">
+   <h5>Comments</h5>
+     <% @idea.comments.each do |com| %>
+     <div class="well">
+       <p><%= com.body %></p>
+       <p><b>Created:</b> <%= com.created_at %><b>By: </b><%= com.user_name %></p>
+     </div>
+   <% end %>
+ </div>
+
+ </div>

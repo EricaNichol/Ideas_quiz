@@ -1,0 +1,17 @@
+<div class="container">
+  <article>
+<h2>Welcome to My Ideas Page</h2>
+  <% @ideas.each do |idea| %>
+    <article>
+      <p>
+        <b><h4><%= link_to idea.title, idea %></h4></b>
+        <%= idea.body %><br><br>
+        <b>By:</b> <%= link_to idea.user.first_name, idea %>
+        <b>Created At: </b><%= idea.created_at %>
+            <% end %>
+      </article>
+  </article>
+</div>
+
+
+</div>

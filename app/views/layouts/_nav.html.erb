@@ -1,0 +1,31 @@
+<nav class="navbar navbar-default">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <%= link_to "My </> Idea", ideas_path, class: "navbar-brand" %>
+    </div>
+
+    <div class="navbar-body">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "My Ideas", ideas_path %></li>
+        <li><%= link_to "Create Idea", new_idea_path %></li>
+      </ul>
+    </div>
+
+    <div class="navbar-right">
+
+
+      <ul class="nav navbar-nav">
+        <% if user_signed_in? %>
+          <li class="navbar-text"> <p>Hello <%= current_user.first_name %>,
+            <%= link_to "Sign-Out", sessions_path, method: :delete, data: {confirm: "are you sure you want to log out?"} %></p></li>
+              <% else %>
+          <li><%= link_to "Sign Up", new_user_path %></li>
+          <li><%= link_to "Sign In", new_session_path %></li>
+            <% end %>
+      </ul>
+    </div>
+
+  </div>
+</nav>
